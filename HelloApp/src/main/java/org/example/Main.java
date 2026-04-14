@@ -7,42 +7,40 @@ public class Main {
 
         Scanner input = new Scanner(System.in);
 
-        // Array of 5 numbers
-        int[] numbers = new int[5];
+        // Fixed size matrix (3x3)
+        int rows = 3;
+        int cols = 3;
 
-        System.out.println("Enter 5 numbers:");
+        int[][] matrix = new int[rows][cols];
 
-        // Input with validation
-        for (int i = 0; i < numbers.length; i++) {
-            numbers[i] = input.nextInt();
-        }
+        System.out.println("Enter 3x3 matrix values:");
 
-        // Check each number
-        for (int i = 0; i < numbers.length; i++) {
+        // Input matrix
+        for (int i = 0; i < matrix.length; i++) {
 
-            if (numbers[i] > 0) {
+            for (int j = 0; j < matrix[i].length; j++) {
 
-                if (numbers[i] % 2 == 0) {
-                    System.out.println(numbers[i] + " is Positive and Even");
-                } else {
-                    System.out.println(numbers[i] + " is Positive and Odd");
-                }
-
-            } else if (numbers[i] < 0) {
-                System.out.println(numbers[i] + " is Negative");
-            } else {
-                System.out.println(numbers[i] + " is Zero");
+                matrix[i][j] = input.nextInt();
             }
         }
 
-        // Compare first and last element
-        if (numbers[0] == numbers[4]) {
-            System.out.println("First and Last are Equal");
-        } else if (numbers[0] > numbers[4]) {
-            System.out.println("First is Greater than Last");
-        } else {
-            System.out.println("First is Less than Last");
+        int sum = 0;
+
+        System.out.println("\nMatrix is:");
+
+        // Display + sum
+        for (int i = 0; i < matrix.length; i++) {
+
+            for (int j = 0; j < matrix[i].length; j++) {
+
+                System.out.print(matrix[i][j] + " ");
+                sum += matrix[i][j];
+            }
+
+            System.out.println();
         }
+
+        System.out.println("\nSum of matrix elements = " + sum);
 
         input.close();
     }
