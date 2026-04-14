@@ -7,23 +7,31 @@ public class Main {
 
         Scanner input = new Scanner(System.in);
 
-        System.out.println("Enter year:");
-        int year = input.nextInt();
+        // Fixed size array for 10 students
+        int[] ages = new int[10];
 
-        boolean isLeap = false;
+        System.out.println("Enter ages of 10 students:");
 
-        // Check Gregorian rule
-        if (year >= 1582) {
+        // Input with validation
+        for (int i = 0; i < ages.length; i++) {
 
-            if ((year % 400 == 0) || (year % 4 == 0 && year % 100 != 0)) {
-                isLeap = true;
+            ages[i] = input.nextInt();
+
+            // Validate age
+            if (ages[i] < 0) {
+                System.err.println("Invalid age entered!");
+                System.exit(0);
             }
         }
 
-        if (isLeap) {
-            System.out.println("Leap Year");
-        } else {
-            System.out.println("Not a Leap Year");
+        // Check voting eligibility
+        for (int i = 0; i < ages.length; i++) {
+
+            if (ages[i] >= 18) {
+                System.out.println("Student " + (i + 1) + " can vote (Age: " + ages[i] + ")");
+            } else {
+                System.out.println("Student " + (i + 1) + " cannot vote (Age: " + ages[i] + ")");
+            }
         }
 
         input.close();
