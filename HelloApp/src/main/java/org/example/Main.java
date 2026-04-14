@@ -7,74 +7,55 @@ public class Main {
 
         Scanner input = new Scanner(System.in);
 
-        final int SIZE = 10;
+        // Take user input
+        System.out.print("Enter a positive number: ");
+        int number = input.nextInt();
 
-        double[] salary = new double[SIZE];
-        double[] years = new double[SIZE];
-        double[] bonus = new double[SIZE];
-        double[] newSalary = new double[SIZE];
+        // Validate input
+        if (number < 0) {
+            System.err.println("Invalid input. Number must be positive.");
+            System.exit(0);
+        }
 
-        double totalOldSalary = 0;
-        double totalNewSalary = 0;
-        double totalBonus = 0;
+        // Temporary variable for processing digits
+        int tempNumber = number;
 
-        // Input
-        for (int i = 0; i < SIZE; i++) {
+        // Count digits in the number
+        int digitCount = 0;
+        while (tempNumber > 0) {
+            digitCount++;
+            tempNumber = tempNumber / 10;
+        }
 
-            System.out.println("\nEmployee " + (i + 1));
+        // Array to store digits
+        int[] digits = new int[digitCount];
 
-            System.out.print("Enter salary: ");
-            salary[i] = input.nextDouble();
+        // Reset temp variable
+        tempNumber = number;
 
-            if (salary[i] <= 0) {
-                System.err.println("Invalid salary");
-                i--;
-                continue;
-            }
+        // Extract digits and store in array
+        for (int i = 0; i < digits.length; i++) {
+            digits[i] = tempNumber % 10;
+            tempNumber = tempNumber / 10;
+        }
 
-            System.out.print("Enter years of service: ");
-            years[i] = input.nextDouble();
+        // Frequency array for digits 0–9
+        int[] frequency = new int[10];
 
-            if (years[i] < 0) {
-                System.err.println("Invalid years of service");
-                i--;
+        // Count frequency of each digit
+        for (int i = 0; i < digits.length; i++) {
+            frequency[digits[i]]++;
+        }
+
+        // Display frequency of each digit
+        System.out.println("\nDigit Frequencies:");
+        for (int i = 0; i < frequency.length; i++) {
+            if (frequency[i] > 0) {
+                System.out.println("Digit " + i + " occurs " + frequency[i] + " times");
             }
         }
 
-        // Calculation
-        for (int i = 0; i < SIZE; i++) {
-
-            double rate;
-
-            if (years[i] > 5) {
-                rate = 0.05;
-            } else {
-                rate = 0.02;
-            }
-
-            bonus[i] = salary[i] * rate;
-            newSalary[i] = salary[i] + bonus[i];
-
-            totalOldSalary += salary[i];
-            totalNewSalary += newSalary[i];
-            totalBonus += bonus[i];
-        }
-
-        // Output
-        System.out.println("\n--- EMPLOYEE REPORT ---");
-
-        for (int i = 0; i < SIZE; i++) {
-            System.out.println("\nEmployee " + (i + 1));
-            System.out.println("Old Salary: " + salary[i]);
-            System.out.println("Years: " + years[i]);
-            System.out.println("Bonus: " + bonus[i]);
-            System.out.println("New Salary: " + newSalary[i]);
-        }
-
-        System.out.println("\nTotal Old Salary: " + totalOldSalary);
-        System.out.println("Total Bonus: " + totalBonus);
-        System.out.println("Total New Salary: " + totalNewSalary);
-
+        // Close scanner
         input.close();
     }
 }
