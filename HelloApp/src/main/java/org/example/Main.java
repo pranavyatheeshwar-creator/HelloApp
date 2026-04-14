@@ -7,22 +7,23 @@ public class Main {
 
         Scanner input = new Scanner(System.in);
 
-        // Input salary
-        System.out.println("Enter salary:");
-        double salary = input.nextDouble();
+        System.out.println("Enter year:");
+        int year = input.nextInt();
 
-        // Input years of service
-        System.out.println("Enter years of service:");
-        int years = input.nextInt();
+        boolean isLeap = false;
 
-        double bonus = 0.0;
+        // Check Gregorian rule
+        if (year >= 1582) {
 
-        // Check eligibility
-        if (years > 5) {
-            bonus = salary * 0.05;
-            System.out.println("Bonus amount: " + bonus);
+            if ((year % 400 == 0) || (year % 4 == 0 && year % 100 != 0)) {
+                isLeap = true;
+            }
+        }
+
+        if (isLeap) {
+            System.out.println("Leap Year");
         } else {
-            System.out.println("No bonus applicable");
+            System.out.println("Not a Leap Year");
         }
 
         input.close();
