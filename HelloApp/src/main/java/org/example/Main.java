@@ -7,25 +7,22 @@ public class Main {
 
         Scanner input = new Scanner(System.in);
 
-        // Take user input
-        System.out.println("Enter a number:");
-        int number = input.nextInt();
+        // Input salary
+        System.out.println("Enter salary:");
+        double salary = input.nextDouble();
 
-        // Check if valid natural number
-        if (number <= 0) {
-            System.out.println("Please enter a positive integer");
+        // Input years of service
+        System.out.println("Enter years of service:");
+        int years = input.nextInt();
+
+        double bonus = 0.0;
+
+        // Check eligibility
+        if (years > 5) {
+            bonus = salary * 0.05;
+            System.out.println("Bonus amount: " + bonus);
         } else {
-
-            // Loop from 1 to number
-            for (int i = 1; i <= number; i++) {
-
-                // Check even or odd
-                if (i % 2 == 0) {
-                    System.out.println(i + " is Even");
-                } else {
-                    System.out.println(i + " is Odd");
-                }
-            }
+            System.out.println("No bonus applicable");
         }
 
         input.close();
